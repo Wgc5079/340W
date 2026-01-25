@@ -1,0 +1,41 @@
+#Readme
+
+## Project OverView
+This repository contains our 340W course project, which focuses on numerical reasoning and question answering over financial documents using the FinQA dataset.
+
+The sheer volume of financial statements makes it difficult for humans to efficiently access and analyze a company’s financial information. Automating this process is challenging due to the complex numerical reasoning and heterogeneous data representations present in financial reports.
+
+Our project explores how machine learning models handle deep, multi-step financial reasoning tasks and evaluates their performance compared to expert-level human reasoning
+
+
+## About FinQA
+FinQA is a large-scale dataset designed to advance research in financial question answering. It consists of:
+
+Question–Answer pairs derived from real financial reports
+
+Questions written by financial experts
+
+Gold reasoning programs annotated for full explainability
+
+Complex, multi-step numerical reasoning tasks
+
+Unlike general-domain QA datasets, FinQA emphasizes:
+
+Financial knowledge understanding
+
+Numerical computation
+
+Reasoning across tables and textual data
+
+The dataset highlights that even large, pre-trained models significantly underperform compared to expert humans when handling financial reasoning tasks.
+
+## GOAL
+Understand challenges in financial numerical reasoning
+
+Analyze how well existing models perform on FinQA
+
+Explore explainability using annotated reasoning programs
+
+Gain hands-on experience working with real-world financial data
+
+Apply concepts from 340W to a practical, research-oriented problem
