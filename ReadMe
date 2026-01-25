@@ -3,8 +3,6 @@
 ## Project OverView
 This repository contains our 340W course project, which focuses on numerical reasoning and question answering over financial documents using the FinQA dataset.
 
-The sheer volume of financial statements makes it difficult for humans to efficiently access and analyze a company’s financial information. Automating this process is challenging due to the complex numerical reasoning and heterogeneous data representations present in financial reports.
-
 Our project explores how machine learning models handle deep, multi-step financial reasoning tasks and evaluates their performance compared to expert-level human reasoning
 
 
