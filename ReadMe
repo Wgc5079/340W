@@ -1,39 +1,89 @@
 ##Readme
 
-## Project OverView
-This repository contains our 340W course project, which focuses on numerical reasoning and question answering over financial documents using the FinQA dataset.
+## 📊 FinQA LLM Evaluation
 
-Our project explores how machine learning models handle deep, multi-step financial reasoning tasks and evaluates their performance compared to expert-level human reasoning
+This project extends the FinQA benchmark by evaluating modern AI systems such as ChatGPT, Gemini, Copilot, and FinBERT on financial numerical reasoning tasks.
+
+Instead of using the original program-based evaluation from FinQA, this project introduces a simplified evaluation pipeline that compares model outputs directly against ground-truth answers while also measuring response time.
+
+## 🚀 Project Overview
+
+The original FinQA paper evaluates models based on program generation and execution. However, modern large language models (LLMs) do not naturally produce structured programs.
+
+This project introduces a new approach:
+
+✅ Evaluate final answers instead of programs
+✅ Compare multiple AI models
+✅ Measure both accuracy and response time
+✅ Analyze reasoning performance on financial data
+
+## ⚙️ Installation
+
+Make sure you have Python installed (Python 3.8+ recommended).
+
+No external libraries are required beyond standard Python.
+
+## ▶️ How to Run
+
+From the project folder, run:
+
+python llm_eval.py --dataset test.json --predictions preds.json
+
+## 📄 Predictions Format
+
+Your predictions file must be a JSON list like this:
+[
+{
+"id": "ETR/2016/page_23.pdf-2",
+"model": "chatgpt",
+"predicted_answer": 94,
+"response_time": 1.12
+},
+{
+"id": "INTC/2015/page_41.pdf-4",
+"model": "gemini",
+"predicted_answer": "14%",
+"response_time": 0.94
+},
+{
+"id": "ABMD/2012/page_75.pdf-1",
+"model": "copilot",
+"predicted_answer": "yes",
+"response_time": 1.48
+}
+]
+Fields:
+id → must match dataset ID
+model → model name (chatgpt, gemini, copilot, etc.)
+predicted_answer → model’s output
+response_time → time taken to generate answer (seconds)
+
+## 📐 Evaluation Method
+
+Each prediction is compared with the ground truth:
+
+Numeric answers → compared with tolerance
+Yes/No answers → exact match
+Percentages → normalized automatically
+
+Accuracy is computed as:
+
+Accuracy = Correct Predictions / Total Predictions
+
+## 🧪 Methodology
+Select a subset of FinQA questions
+Generate prompts using dataset context
+Collect responses from different AI models
+Store outputs in preds.json
+Evaluate using llm_eval.py
+
+##🔥 Innovation
+
+This project improves on the original FinQA research by:
+
+Evaluating modern LLMs not available in the original paper
+Removing dependency on program generation
+Introducing response time analysis
+Providing a unified benchmarking framework
 
 
-## About FinQA
-FinQA is a large-scale dataset designed to advance research in financial question answering. It consists of:
-
-Question–Answer pairs derived from real financial reports
-
-Questions written by financial experts
-
-Gold reasoning programs annotated for full explainability
-
-Complex, multi-step numerical reasoning tasks
-
-Unlike general-domain QA datasets, FinQA emphasizes:
-
-Financial knowledge understanding
-
-Numerical computation
-
-Reasoning across tables and textual data
-
-The dataset highlights that even large, pre-trained models significantly underperform compared to expert humans when handling financial reasoning tasks.
-
-## GOAL
-Understand challenges in financial numerical reasoning
-
-Analyze how well existing models perform on FinQA
-
-Explore explainability using annotated reasoning programs
-
-Gain hands-on experience working with real-world financial data
-
-Apply concepts from 340W to a practical, research-oriented problem
