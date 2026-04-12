@@ -83,13 +83,18 @@ def build_prompt(example: Dict[str, Any], use_model_input: bool = True) -> str:
         context = f"Table:\n{table_text}\n\nPre-text:\n{pre_text}\n\nPost-text:\n{post_text}"
         context_label = "Document context"
 
-    return f"""You are solving a financial reasoning question.
+    return f"""
+You are a financial analyst.
 
-Use the provided context to answer the question.
-Return only the final answer.
-Do not explain your steps unless asked.
+Carefully analyze the provided context.
+Identify relevant numbers and perform calculations.
 
-{context_label}:
+Think step by step internally, but return ONLY the final answer.
+
+If the answer is a percentage, include %.
+If it is a number, return only the number.
+
+Context:
 {context}
 
 Question:
