@@ -40,16 +40,9 @@ GITHUB_TOKEN=your_key_here
 🔹 Run live comparison (single question)
 python ask_live_compare.py --providers openai gemini github_models
 🔹 Run dataset experiment
-python multi_model_compare.py \
-  --dataset dev.json \
-  --providers openai gemini github_models \
-  --limit 5 \
-  --out_dir outputs
+python multi_model_compare.py \--dataset dev.json \--providers openai gemini github_models \--limit 5 \--out_dir outputs
 🔹 Evaluate all models
-python eval_all_models.py \
-  --dataset dev.json \
-  --predictions_dir outputs \
-  --out_dir eval_outputs
+python eval_all_models.py \--dataset dev.json \--predictions_dir outputs \--out_dir eval_outputs
 📄 Predictions Format
 
 Predictions must follow this JSON structure:
