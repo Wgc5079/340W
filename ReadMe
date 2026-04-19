@@ -1,99 +1,117 @@
 ##Readme
 
-## 📊 FinQA LLM Evaluation
+# 📊 FinQA LLM Evaluation
 
-This project extends the FinQA benchmark by evaluating modern AI systems such as ChatGPT, Gemini, Copilot, and FinBERT on financial numerical reasoning tasks.
+This project extends the FinQA benchmark by evaluating modern AI systems such as **ChatGPT, Gemini, and GitHub Models (Copilot-style inference)** on financial numerical reasoning tasks.
 
-Instead of using the original program-based evaluation from FinQA, this project introduces a simplified evaluation pipeline that compares model outputs directly against ground-truth answers while also measuring response time.
+Instead of using the original program-based evaluation from FinQA, this project introduces a simplified and practical evaluation pipeline that compares model outputs directly against ground-truth answers while also measuring response time.
+
+---
 
 ## 🚀 Project Overview
 
-The original FinQA paper evaluates models based on program generation and execution. However, modern large language models (LLMs) do not naturally produce structured programs.
+The original FinQA paper evaluates models based on **program generation and execution**. However, modern large language models (LLMs) do not naturally produce structured programs.
 
-This project introduces a new approach:
+This project proposes a new approach:
 
-✅ Evaluate final answers instead of programs
-✅ Compare multiple AI models
-✅ Measure both accuracy and response time
-✅ Analyze reasoning performance on financial data
+- ✅ Evaluate **final answers instead of programs**
+- ✅ Compare **multiple AI models**
+- ✅ Measure both **accuracy and response time**
+- ✅ Analyze **financial reasoning performance**
+
+---
 
 ## ⚙️ Setup Instructions
 
-1. Install Python packages:
+### 1. Install dependencies
+
+```bash
 python -m pip install -r requirements_models.txt
+2. Create a .env file
 
-2. Create a .env file:
-Copy .env 
+Copy the example file:
 
-3. Add your API keys in .env:
-OPENAI_API_KEY=...
-GEMINI_API_KEY=...
-GITHUB_TOKEN=...
-
-4. Run live comparison:
+cp .env.example .env
+3. Add your API keys
+OPENAI_API_KEY=your_key_here
+GEMINI_API_KEY=your_key_here
+GITHUB_TOKEN=your_key_here
+▶️ How to Run
+🔹 Run live comparison (single question)
 python ask_live_compare.py --providers openai gemini github_models
+🔹 Run dataset experiment
+python multi_model_compare.py \
+  --dataset dev.json \
+  --providers openai gemini github_models \
+  --limit 5 \
+  --out_dir outputs
+🔹 Evaluate all models
+python eval_all_models.py \
+  --dataset dev.json \
+  --predictions_dir outputs \
+  --out_dir eval_outputs
+📄 Predictions Format
 
-5. Run dataset experiment:
-python multi_model_compare.py --dataset dev.json --providers openai gemini github_models --limit 5 --out_dir outputs
+Predictions must follow this JSON structure:
 
-6. Evaluate results:
-python eval_all_models.py --dataset dev.json --predictions_dir outputs --out_dir eval_outputs
-
-## 📄 Predictions Format
-
-Your predictions file must be a JSON list like this:
 [
-{
-"id": "ETR/2016/page_23.pdf-2",
-"model": "chatgpt",
-"predicted_answer": 94,
-"response_time": 1.12
-},
-{
-"id": "INTC/2015/page_41.pdf-4",
-"model": "gemini",
-"predicted_answer": "14%",
-"response_time": 0.94
-},
-{
-"id": "ABMD/2012/page_75.pdf-1",
-"model": "copilot",
-"predicted_answer": "yes",
-"response_time": 1.48
-}
+  {
+    "id": "ETR/2016/page_23.pdf-2",
+    "model": "chatgpt",
+    "predicted_answer": 94,
+    "response_time": 1.12
+  },
+  {
+    "id": "INTC/2015/page_41.pdf-4",
+    "model": "gemini",
+    "predicted_answer": "14%",
+    "response_time": 0.94
+  },
+  {
+    "id": "ABMD/2012/page_75.pdf-1",
+    "model": "copilot",
+    "predicted_answer": "yes",
+    "response_time": 1.48
+  }
 ]
-Fields:
+Fields
 id → must match dataset ID
 model → model name (chatgpt, gemini, copilot, etc.)
-predicted_answer → model’s output
-response_time → time taken to generate answer (seconds)
+predicted_answer → model output
+response_time → time in seconds
+📐 Evaluation Method
 
-## 📐 Evaluation Method
-
-Each prediction is compared with the ground truth:
+Each prediction is compared against the ground truth:
 
 Numeric answers → compared with tolerance
 Yes/No answers → exact match
-Percentages → normalized automatically
-
-Accuracy is computed as:
-
+Percentages → automatically normalized
+Accuracy Formula
 Accuracy = Correct Predictions / Total Predictions
-
-## 🧪 Methodology
+🧪 Methodology
 Select a subset of FinQA questions
 Generate prompts using dataset context
-Collect responses from different AI models
-Store outputs in preds.json
-Evaluate using llm_eval.py
+Collect responses from multiple AI models
+Store outputs in prediction files
+Evaluate results using llm_eval.py
+🔥 Innovation / Contribution
 
-##🔥 Innovation
-
-This project improves on the original FinQA research by:
+This project improves on the original FinQA framework by:
 
 Evaluating modern LLMs not available in the original paper
 Removing dependency on program generation
 Introducing response time analysis
-Providing a unified benchmarking framework
+Using a multi-model comparison framework
+Providing a more practical and scalable benchmarking pipeline
+⚠️ Notes
+Do not upload your .env file (contains API keys)
+Use .env.example as a template instead
+Start with small datasets (--limit 3) for testing
+📌 Summary
+
+This project transforms FinQA into a modern LLM benchmarking system, enabling direct comparison of AI models on financial reasoning tasks using accuracy and efficiency metrics.
+
+
+
 
 
