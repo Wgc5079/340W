@@ -27,22 +27,23 @@ This project proposes a new approach:
 
 ```bash
 python -m pip install -r requirements_models.txt
-2. Create a .env file
+2. Set API Keys (PowerShell)
 
-Copy the example file:
+Before running the scripts, set your API keys in the terminal:
 
-cp .env.example .env
-3. Add your API keys
-OPENAI_API_KEY=your_key_here
-GEMINI_API_KEY=your_key_here
-GITHUB_TOKEN=your_key_here
+$env:OPENAI_API_KEY="XXXXXXXXXXXX"
+$env:GEMINI_API_KEY="AAAAAAAAAAAAA"
+$env:GITHUB_TOKEN="CCCCCCCCCCCCC"
+
+⚠️ These keys are temporary and will reset when you close the terminal.
+
 ▶️ How to Run
 🔹 Run live comparison (single question)
 python ask_live_compare.py --providers openai gemini github_models
 🔹 Run dataset experiment
-python multi_model_compare.py \--dataset dev.json \--providers openai gemini github_models \--limit 5 \--out_dir outputs
+python multi_model_compare.py --dataset dev.json --providers openai gemini github_models --limit 5 --out_dir outputs
 🔹 Evaluate all models
-python eval_all_models.py \--dataset dev.json \--predictions_dir outputs \--out_dir eval_outputs
+python eval_all_models.py --dataset dev.json --predictions_dir outputs --out_dir eval_outputs
 📄 Predictions Format
 
 Predictions must follow this JSON structure:
@@ -97,12 +98,12 @@ Introducing response time analysis
 Using a multi-model comparison framework
 Providing a more practical and scalable benchmarking pipeline
 ⚠️ Notes
-Do not upload your .env file (contains API keys)
-Use .env.example as a template instead
+Do not hardcode API keys in the code
+Always set API keys in the terminal before running
 Start with small datasets (--limit 3) for testing
 📌 Summary
 
-This project transforms FinQA into a modern LLM benchmarking system, enabling direct comparison of AI models on financial reasoning tasks using accuracy and efficiency metrics.
+This project transforms FinQA into a modern LLM benchmarking system, enabling direct comparison of AI models on financial reasoning tasks using both accuracy and efficiency metrics.
 
 
 
